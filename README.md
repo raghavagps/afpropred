@@ -1,5 +1,5 @@
 # **AfProPred**
-A computational method to predict the probability of lncRNA localizing to the cytoplasm
+A tool to predict anti-freezing proteins using evolutionary profiles
 ## Introduction
 AfProPred is a tool developed by Raghva-Lab in 2024. It is designed to predict whether a protein is Anti-Freezing or not. It utilizes both amino-acid compositions and PSSM as features to make predictions using an ExtraTrees Classifier. AfProPred is also available as web-server at https://webs.iiitd.edu.in/raghava/afpropred. Please read/cite the content about the AfProPred for complete information including algorithm behind the approach.
 
