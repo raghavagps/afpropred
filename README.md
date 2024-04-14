@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# afpropred
-=======
 # **AfProPred**
 A computational method to predict the probability of lncRNA localizing to the cytoplasm
 ## Introduction
