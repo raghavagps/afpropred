@@ -80,6 +80,8 @@ README.md			      : This file provide information about this package
 
 model               : This folder contains two pickled models
 
+swissprot           : This folder contains the swissprot database for generating PSSM profiles
+
 afpropred.py        : Main python program
 
 possum              : This folder contains the program POSSUM, that is used to calculate PSSM features
