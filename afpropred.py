@@ -14,6 +14,9 @@ import numpy as np
 import glob
 from Bio import SeqIO
 import shutil
+import requests
+import zipfile
+
 
 warnings.filterwarnings('ignore')
 parser = argparse.ArgumentParser(description='Please provide following arguments.') 
@@ -31,6 +34,28 @@ args = parser.parse_args()
 
 nf_path = os.path.dirname(__file__)
 std = list("ACDEFGHIKLMNPQRSTVWY")
+
+
+if not os.path.exists(nf_path + '/model'):
+    response = requests.get('https://webs.iiitd.edu.in/raghava/afpropred/model.zip')
+    if response.status_code == 200:
+        with open(os.path.join(nf_path + '/model.zip'), 'wb') as f:
+                f.write(response.content)
+    with zipfile.ZipFile(nf_path + '/model.zip', 'r') as zip_ref:
+            zip_ref.extractall(nf_path + '/' )
+    print("ZIP file contents extracted successfully.")
+    os.remove(nf_path + '/model.zip')
+    
+if not os.path.exists(nf_path + '/swissprot'):
+    response = requests.get('https://webs.iiitd.edu.in/raghava/afpropred/swissprot.zip')
+    if response.status_code == 200:
+        with open(os.path.join(nf_path + '/swissprot.zip'), 'wb') as f:
+                f.write(response.content)
+    with zipfile.ZipFile(nf_path + '/swissprot.zip', 'r') as zip_ref:
+            zip_ref.extractall(nf_path + '/' )
+    print("ZIP file contents extracted successfully.")
+    os.remove(nf_path + '/swissprot.zip')
+    
 
 def fasta_to_dataframe(fasta_file):
     sequences = {'ID': [], 'Sequence': []}
@@ -110,13 +135,13 @@ def gen_pssm(fasta_path, pssm_path):
 def feat_gen_aac(file,out):
     aac_comp(file, wd + '/aac_temp')
     df = pd.read_csv(wd + '/aac_temp')
+    df = df.iloc[:,:-1]
     df.to_csv(out, index=None)
     os.remove(wd + '/aac_temp')
 
 def feat_gen_acc_pssm(file, out1, out2):
-    feat_gen_aac(file, out1)
-    aac_df = pd.read_csv(out1)
-    aac_df = aac_df.iloc[:,:-1]
+    feat_gen_aac(file, wd + '/aac_temp1')
+    aac_df = pd.read_csv(wd + '/aac_temp1')
     file_split(file, wd + '/fasta_files')
     gen_pssm(wd + '/fasta_files', wd + '/pssm_files')
     df = fasta_to_dataframe(file)
@@ -141,6 +166,7 @@ def feat_gen_acc_pssm(file, out1, out2):
     columns.append('ID')
     df3 = df3[columns]
     df3.to_csv(out2)
+    os.remove(wd + '/aac_temp1')
     os.remove(wd + '/pssm_input.fasta')
     os.remove(wd + '/pssm_temp1')
     os.remove(wd + '/pssm_temp2')
