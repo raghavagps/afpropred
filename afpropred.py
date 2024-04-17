@@ -155,8 +155,8 @@ def feat_gen_acc_pssm(file, out1, out2):
     pssm1 = pd.merge(df1, df, on="ID", how="left")
     pssm1['ID'] = '>' + pssm1['ID']
     pssm1[['ID','Sequence']].to_csv(wd + '/pssm_input.fasta' ,index= None, header=False, sep="\n")
-    os.system('python ' + wd + '/possum/possum.py -i ' + wd + '/pssm_input.fasta' + ' -o ' + wd + '/pssm_temp1 -t pssm_composition -p ' + wd + '/pssm_files/pssm_raw')
-    os.system('python ' + wd + '/possum/headerHandler.py -i ' + wd + '/pssm_temp1' + ' -o ' + wd + '/pssm_temp2 -p pssm_')
+    os.system('python ' + nf_path + '/possum/possum.py -i ' + wd + '/pssm_input.fasta' + ' -o ' + wd + '/pssm_temp1 -t pssm_composition -p ' + wd + '/pssm_files/pssm_raw')
+    os.system('python ' + nf_path + '/possum/headerHandler.py -i ' + wd + '/pssm_temp1' + ' -o ' + wd + '/pssm_temp2 -p pssm_')
     df2 = pd.read_csv(wd + '/pssm_temp2')
 
     df2['ID'] = df1['ID']
