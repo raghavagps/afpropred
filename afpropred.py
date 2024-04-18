@@ -129,7 +129,7 @@ def gen_pssm(fasta_path, pssm_path):
     listdir = glob.glob(fasta_path+'/*.fasta')
     for i in listdir:
         filename = i.split('/')[-1].rsplit('.', 1)[0]
-        cmd = nf_path + "/ncbi_blast_2.15/bin/psiblast -out "+pssm_path+"/pssm_raw1/"+filename+".homologs -outfmt 7 -query "+fasta_path+"/"+filename+".fasta -db ./swissprot/swissprot -evalue 0.001 -word_size 3 -max_target_seqs 6000 -num_threads 10 -gapopen 11 -gapextend 1 -matrix BLOSUM62 -comp_based_stats T -num_iterations 3 -out_pssm "+pssm_path+"/pssm_raw1/"+filename+".cptpssm -out_ascii_pssm "+pssm_path+"/pssm_raw/"+filename+".pssm"
+        cmd = nf_path + "/ncbi_blast_2.15/bin/psiblast -out "+pssm_path+"/pssm_raw1/"+filename+".homologs -outfmt 7 -query "+fasta_path+"/"+filename+".fasta -db "+nf_path+"/swissprot/swissprot -evalue 0.001 -word_size 3 -max_target_seqs 6000 -num_threads 10 -gapopen 11 -gapextend 1 -matrix BLOSUM62 -comp_based_stats T -num_iterations 3 -out_pssm "+pssm_path+"/pssm_raw1/"+filename+".cptpssm -out_ascii_pssm "+pssm_path+"/pssm_raw/"+filename+".pssm"
         os.system(cmd)
 
 def feat_gen_aac(file,out):
