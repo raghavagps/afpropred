@@ -2,7 +2,9 @@
 A computational method to predict the Anti-Freezing proteins based on evolutionary profiles
 ## Introduction
 AfProPred is a tool developed by Raghava-Lab in 2024. It is designed to predict whether a protein is Anti-Freezing or not. It utilizes both amino-acid compositions and PSSM as features to make predictions using an ExtraTrees Classifier. AfProPred is also available as web-server at https://webs.iiitd.edu.in/raghava/afpropred. Please read/cite the content about the AfProPred for complete information including algorithm behind the approach.
-
+## Reference
+Kumar N., Choudhury S., Bajiya N., Patiyal S. and Raghava GPS (2024) Prediction of Anti-Freezing Proteins From Their Evolutionary Profile. <a style="color:blue" href="https://doi.org/10.1002/pmic.202400157">Proteomics, doi.org/10.1002/pmic.202400157</a> 
+				
 ## PIP Installation
 PIP version is also available for easy installation and usage of this tool. The following command is required to install the package 
 ```
